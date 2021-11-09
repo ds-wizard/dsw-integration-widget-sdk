@@ -4,7 +4,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = (env, argv) => {
 
     const conf = {
-        mode: 'development',
+        mode: 'production',
         devServer: {
             open: true,
             static: {
