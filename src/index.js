@@ -1,16 +1,26 @@
 export default class DSWIntegrationWidget {
 
-    constructor() {
-        this.path = null
+    constructor(allowedHosts) {
+        if (!Array.isArray(allowedHosts)) {
+            allowedHosts = [allowedHosts]
+        }
+
+        this._allowedHosts = allowedHosts
+        this._path = null
+        this._origin = null
     }
 
     init() {
         return new Promise((resolve, reject) => {
-            // TODO: Do not use '*'
             window.opener.postMessage({ type: 'ready' }, '*')
             window.addEventListener('message', (event) => {
+                if (!this._isEventOriginAllowed(event)) {
+                    return
+                }
+
                 if (event.data.type === 'path') {
-                    this.path = event.data.path
+                    this._path = event.data.path
+                    this._origin = event.origin
                     resolve()
                 }
             }, false)
@@ -18,12 +28,21 @@ export default class DSWIntegrationWidget {
     }
 
     send(value, url) {
-        // TODO: Do not use '*'
         window.opener.postMessage({
             type: 'selection',
             url,
             value,
-            path: this.path
-        }, '*')
+            path: this._path
+        }, this._origin)
+    }
+
+    _isEventOriginAllowed(event) {
+        console.log(this._getEventOrigin(event))
+        return this._allowedHosts.includes(this._getEventOrigin(event))
+    }
+
+    _getEventOrigin(event) {
+        const parts = event.origin.split('://')
+        return parts.length > 1 ? parts[1].split(':')[0] : null
     }
 }
