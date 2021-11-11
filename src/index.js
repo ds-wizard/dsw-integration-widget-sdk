@@ -12,6 +12,11 @@ export default class DSWIntegrationWidget {
 
     init() {
         return new Promise((resolve, reject) => {
+            if (!window.opener) {
+                reject(new Error('window.opener not set'))
+                return
+            }
+
             window.opener.postMessage({ type: 'ready' }, '*')
             window.addEventListener('message', (event) => {
                 if (!this._isEventOriginAllowed(event)) {
@@ -27,17 +32,16 @@ export default class DSWIntegrationWidget {
         })
     }
 
-    send(value, url) {
+    send(value, id) {
         window.opener.postMessage({
             type: 'selection',
-            url,
+            id,
             value,
             path: this._path
         }, this._origin)
     }
 
     _isEventOriginAllowed(event) {
-        console.log(this._getEventOrigin(event))
         return this._allowedHosts.includes(this._getEventOrigin(event))
     }
 

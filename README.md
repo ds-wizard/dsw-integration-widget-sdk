@@ -39,12 +39,16 @@ On the page that will serve your widget, you need to initialize it first. Then, 
 ```javascript
 const widget = new DSWIntegrationWidget('biohack.ds-wizard.org')
 
-widget.init().then(() => {
+widget.init()
+    .then(() => {
 
-    // ...
+        // ...
 
-    widget.send(value, url)
-})
+        widget.send(value, id)
+    })
+    .catch((error) => {
+        // handle the error
+    })
 ```
 
 When creating a new widget instance, you need to specify what DSW instance (or instances) the widget should work with. It will not send any data if it is not open from the allowed DSW instance. You can also use an array for more instances:
@@ -53,7 +57,7 @@ When creating a new widget instance, you need to specify what DSW instance (or i
 const widget = new DSWIntegrationWidget(['biohack.ds-wizard.org', 'demo.ds-wizard.org'])
 ```
 
-When sending the data to DSW, the `value` is a text value that will be visible for users in DSW, the `url` refers to the data.
+When sending the data to DSW, the `value` is a text value that will be visible for users in DSW, the `id` is the ID of the item that will be used in the item URL in DSW.
 
 You can explore the examples in this repository. The [simple](examples/simple) example demonstrates a basic widget with the selection. The [login](examples/login) demonstrates how you can redirect users to login first and show the widget.
 
