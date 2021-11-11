@@ -17,11 +17,11 @@
     </nav>
     <div class="container mt-4">
         <div class="list-group">
-            <a href="#" data-url="http://example.com/project1" class="list-group-item list-group-item-action">Cras justo odio</a>
-            <a href="#" data-url="http://example.com/project2" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-            <a href="#" data-url="http://example.com/project3" class="list-group-item list-group-item-action">Morbi leo risus</a>
-            <a href="#" data-url="http://example.com/project4" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-            <a href="#" data-url="http://example.com/project5" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+            <a href="#" data-id="1" class="list-group-item list-group-item-action">Cras justo odio</a>
+            <a href="#" data-id="2" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+            <a href="#" data-id="3" class="list-group-item list-group-item-action">Morbi leo risus</a>
+            <a href="#" data-id="4" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+            <a href="#" data-id="5" class="list-group-item list-group-item-action">Vestibulum at eros</a>
         </div>
     </div>
     <script>
@@ -34,11 +34,11 @@
             // Example: Clicking on item in the list group will send the values back
             document.querySelectorAll('.list-group a').forEach((el) => {
                 el.onclick = () => {
-                    const url = el.dataset.url // we need URL
+                    const id = el.dataset.id // we need id
                     const value = el.innerHTML // and visible value
 
                     // DSW Widget: Send the values back to the DSW
-                    dswWidget.send(value, url)
+                    dswWidget.send(value, id)
 
                     // Example: Close the popup window after the selection is done
                     window.close()
