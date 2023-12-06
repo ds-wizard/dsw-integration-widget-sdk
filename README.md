@@ -1,3 +1,6 @@
+> [!CAUTION]
+> As of DSW 4.1, DSW Integration Widget SDK is no longer supported. Use [DSW Integration SDK](https://github.com/ds-wizard/dsw-integration-sdk) instead.
+
 # DSW Integration Widget SDK
 
 [![Node.js Package CI](https://github.com/ds-wizard/dsw-integration-widget-sdk/workflows/Node.js%20Package/badge.svg)](https://github.com/ds-wizard/dsw-integration-widget-sdk/actions)
